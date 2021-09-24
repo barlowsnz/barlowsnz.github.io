@@ -1,20 +1,9 @@
 stages:
   - build
   - deploy
-jar:
-  stage: build
-  image: trion/ng-cli
-  script:
-    - yarn install
-    - node --max_old_space_size=8192 node_modules/@angular/cli/bin/ng build
-    #- ng build --prod
-  artifacts:
-    paths:
-      - dist/
 
 deploy:
   stage: deploy
-  # Image needs to have ssh-client
   image: docker:git
   services:
     - docker:dind
